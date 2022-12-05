@@ -10,6 +10,7 @@ datalist = readdir(filepath)
 function datadeal(file)
     data = CSV.read(file,DataFrame,header=0)
     h,w = size(data)
+#     Algorithm g2
 #     for i in 1:1:85
 #         for j in 1:1:w
 #             # println(data[i+100,j])
@@ -17,6 +18,7 @@ function datadeal(file)
 #             data[h-i+1,j] = data[h-i-100,j]
 #         end
 #     end
+#     Algorithm g3
     data[1:100,:] = data[100:199,:]
     data[h-99:h,:] = data[100:199,:]
     CSV.write(file,data;header=false)    
@@ -28,6 +30,7 @@ for filename in datalist
     file = joinpath(filepath,filename)
     if occursin(".csv",filename)
         datadeal(file)
+#         Note:Algorithm g1
         # data = CSV.read(file,DataFrame,header=0)
         # h,w = size(data)
         # for i in 1:1:85
