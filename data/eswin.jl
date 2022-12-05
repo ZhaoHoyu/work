@@ -10,13 +10,15 @@ datalist = readdir(filepath)
 function datadeal(file)
     data = CSV.read(file,DataFrame,header=0)
     h,w = size(data)
-    for i in 1:1:85
-        for j in 1:1:w
-            # println(data[i+100,j])
-            data[i,j] = data[i+100,j]
-            data[h-i+1,j] = data[h-i-100,j]
-        end
-    end
+#     for i in 1:1:85
+#         for j in 1:1:w
+#             # println(data[i+100,j])
+#             data[i,j] = data[i+100,j]
+#             data[h-i+1,j] = data[h-i-100,j]
+#         end
+#     end
+    data[1:100,:] = data[100:199,:]
+    data[h-99:h,:] = data[100:199,:]
     CSV.write(file,data;header=false)    
 end
 
