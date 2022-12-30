@@ -52,6 +52,8 @@ function duvWRTCenter(data)
         x += data[i,3]
         y += data[i,4]
     end
+    x = x/4
+    y = y/4
     u = 4*x/(-2*x+12*y+3)/4
     v = 9*y/(-2*x+12*y+3)/4
     duvWRTCenter = 0
