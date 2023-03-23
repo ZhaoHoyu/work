@@ -1,0 +1,33 @@
+offsetV=csvread('offset.csv');
+grayx=10;
+bandx=5;
+Vdata=importdata('Vh.mat');
+V=zeros(256,4,length(band0));
+for i=1:length(band0)
+    V(:,:,i)=Vdata(Vdata(:,1)==band0(i),2:5);
+end
+h=2796;
+w=1290;
+%
+% function pattern = makepattern(offset,grayx,bandx,V,h,w)
+
+    gray0=0:255;
+    Lv0=(gray0./255).^2.2;%亮度比例系数
+    V0=V(:,2:4,bandx);
+    Lv_x=(grayx./255).^2.2;%理论亮度比例系数
+    V_xR=interp1(Lv0,V0(:,1),Lv_x);%理论亮度对应理论电压
+    V_xG=interp1(Lv0,V0(:,2),Lv_x);%理论亮度对应理论电压
+    V_xB=interp1(Lv0,V0(:,3),Lv_x);%理论亮度对应理论电压
+    V_xRo=V_x-offsetV;%达到此亮度实际的每个像素电压
+    %
+    V_xo(V_xo>max(V0))=max(V0);%防插值出现nan
+    V_xo(V_xo<min(V0))=min(V0);
+    %
+    Lv_xo=interp1(V0,Lv0,V_xo);%达到实际亮度的输入亮度比例系数
+    pattern_cal=Lv_xo.^(1/2.2)*255;%达到实际亮度的灰阶
+
+    
+    pattern=zeros(h,w,3);
+    pattern(:,:,colorch==color)=pattern_cal;
+    pattern=uint8(pattern);
+% end
