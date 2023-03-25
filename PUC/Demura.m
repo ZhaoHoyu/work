@@ -32,6 +32,7 @@ Vdata_capture(3) = Vdata_capture_B(gray+1);
 [r,c,~]=size(I);
 raw=round(r/2);
 col=round(c/2);
+m = 200;
 lum_center=mean2(I(raw-m:raw+m,col-m:col+m,1));
 lum_center(2)=mean2(I(raw-m:raw+m,col-m:col+m,2));
 lum_center(3)=mean2(I(raw-m:raw+m,col-m:col+m,3));
@@ -45,7 +46,7 @@ save('offset.mat','offset');
 
 %% generate simulated ptn
 % gray_range=0:255;
-% gray_ideal_coefficient=(gray_range./255).^2.2;%ÁÁ¶È±ÈÀıÏµÊı
+% gray_ideal_coefficient=(gray_range./255).^2.2;%ÃÃÂ¶ÃˆÂ±ÃˆÃ€Ã½ÃÂµÃŠÃ½
 % Vdata_ini=importdata('Vh.mat');
 % bandlist=1:13;
 % DBV=[2175,1600,1200,650,300,200,100,90,60,30,15,10,4];
